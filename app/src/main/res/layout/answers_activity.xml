@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/answerstext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:text="ANSWERS"
+        android:textSize="35sp"
+        android:textStyle="bold"/>
+    <ScrollView
+        android:id="@+id/scrollans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/answerstext"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="30dp">
+        <TextView
+            android:id="@+id/answers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="1. What is the full meaning of CPU? A. Cee Pea You B. Sea Peal You C. See Pee Yu D. SeePy you Answer: C"
+            android:textSize="25sp"
+            android:textStyle="normal"/>
+    </ScrollView>
+    <Button
+        android:id="@+id/restart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scrollans"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/red"
+        android:text="restart"
+        android:textSize="13sp"
+        app:cornerRadius="8dp" />
+</RelativeLayout>

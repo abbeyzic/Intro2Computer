@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    tools:context=".MainActivity"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/info"
+        android:layout_width="147dp"
+        android:layout_height="128dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/info" />
+
+    <LinearLayout
+        android:id="@+id/infoText"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_below="@+id/info"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/option_back"
+        android:background="@drawable/radio_button_pad">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            android:textAlignment="center"
+            android:text="Are you sure you want to submit?"
+            android:textSize="40sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/actionbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/infoText"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/no"
+            android:layout_width="120sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="@color/red"
+            android:onClick="goBack"
+            android:text="no"
+            android:textColor="@color/nwhite"
+            android:textSize="13sp"
+            app:cornerRadius="8dp" />
+
+        <Button
+            android:id="@+id/yes"
+            android:layout_width="120sp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30sp"
+            android:backgroundTint="@color/teal_700"
+            android:onClick="openScore"
+            android:text="yes"
+            android:textColor="@color/nwhite"
+            app:cornerRadius="8dp"
+            tools:ignore="OnClick" />
+    </LinearLayout>
+</RelativeLayout>

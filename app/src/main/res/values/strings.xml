@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Intro2Computer</string>
+    <string name="instructs"><![CDATA[
+    &#8226; Answer all questions<br></br>
+    &#8226; When you are done, click on the submit button<br></br>
+    &#8226; You can view your score and question answers after submitting
+    ]]></string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="solution_sample">1. What is the full meaning of CPU? A. Cee Pea You B. Sea Peal You C. See Pee Yu D. SeePy you Answer: C</string>
+
+    <string name="action_settings">Settings</string>
+</resources>

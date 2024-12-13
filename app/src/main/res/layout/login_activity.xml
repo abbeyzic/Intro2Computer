@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_centerHorizontal="true"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/applogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"
+        android:contentDescription="logo"
+        android:src="@drawable/applogo" />
+
+    <TextView
+        android:id="@+id/entername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/applogo"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:text="Enter your name to proceed:"
+        android:fontFamily="@font/montserrat_regular"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="290dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/entername"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="50dp"
+        android:background="@drawable/inputtext"
+        android:hint="Full Name"
+        android:inputType="text|textPersonName"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+    <TextView
+        android:id="@+id/note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/username"
+        android:layout_marginStart="50dp"
+        android:layout_centerHorizontal="true"
+        android:text="NB: Your name is not stored, used or sold"
+        android:textSize="15sp"
+        android:textStyle="italic"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/loginbtn"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/note"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30sp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/green"
+        android:onClick="launchInstructions"
+        android:text="Login"
+        android:textColor="@color/nwhite"
+        android:fontFamily="@font/montserrat_regular"
+        android:textSize="23sp" />
+
+</RelativeLayout>
