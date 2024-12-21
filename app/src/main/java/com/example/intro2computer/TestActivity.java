@@ -7,7 +7,6 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.RadioButton;
@@ -28,6 +27,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     int currentQuestion= currentQuestionIndex+1;
 
     String selectedAnswer = "";
+
 
 
     @SuppressLint("SetTextI18n")
@@ -52,7 +52,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onFinish() {
                 String passStatus = "Time's up!";
-                new AlertDialog.Builder(this)
+                new AlertDialog.Builder(TestActivity.this)
                         .setTitle(passStatus)
                         .setMessage("Score is " + score+" out of"+ totalQuestions)
                         .setPositiveButton("Restart",(dialogInterface, i) -> restartQuiz())
@@ -94,24 +94,28 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 currentQuestion+=1;
                 currentQuestionIndex+=1;
                 loadNewQuestion();
+                totalQuestionTextView.setText("Question : "+ currentQuestion +"/" + totalQuestions);
             }
         });
         prevBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Handle previous button click
-               currentQuestionIndex--;
                 loadPreviousQuestion();
+                totalQuestionTextView.setText("Question : "+ currentQuestion +"/" + totalQuestions);
             }
         });
+        //Question Number
+        totalQuestionTextView.setText("Question : "+ currentQuestion +"/" + totalQuestions);
+
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finishQuiz();
             }
         });
-        //Question Number
-        totalQuestionTextView.setText("Question : "+ currentQuestion +"/" + totalQuestions);
+
+
 
     }
 
@@ -157,8 +161,9 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         loadNewQuestion();
     }
     void finishQuiz(){
-        Intent j = new Intent(this, ConfirmActivity.class);
-        j.putExtra("Score", score);
-        startActivity(j);
+
+        Intent i = new Intent(this, ConfirmActivity.class);
+        startActivity(i);
+        }
     }
-}
+
