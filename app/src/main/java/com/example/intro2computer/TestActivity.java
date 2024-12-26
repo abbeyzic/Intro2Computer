@@ -1,33 +1,37 @@
 package com.example.intro2computer;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import android.widget.RadioButton;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 
-public class TestActivity extends AppCompatActivity implements View.OnClickListener{
+public class TestActivity extends AppCompatActivity implements View.OnClickListener {
     TextView totalQuestionTextView;
     TextView questionTextView;
-    RadioButton ansA; RadioButton ansB; RadioButton ansC; RadioButton ansD;
-    Button nextBtn; Button prevBtn; Button submitBtn;
+    RadioButton ansA;
+    RadioButton ansB;
+    RadioButton ansC;
+    RadioButton ansD;
+    Button nextBtn;
+    Button prevBtn;
+    Button submitBtn;
 
-    int score= 0;
+    int score = 0;
     int totalQuestions = QuestionAnswer.question.length;
     int currentQuestionIndex = 0;
-    int currentQuestion= currentQuestionIndex+1;
+    int currentQuestion = currentQuestionIndex + 1;
 
     String selectedAnswer = "";
-
 
 
     @SuppressLint("SetTextI18n")
@@ -36,9 +40,11 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
+        ((TextView)findViewById(R.id.questionId)).setText("Question : " + currentQuestion + "/" + totalQuestions);
+
         Intent i = getIntent();
-        String message= i.getStringExtra("Name");
-        ((TextView)findViewById(R.id.username)).setText(message);
+        String message = i.getStringExtra("Name");
+        ((TextView) findViewById(R.id.username)).setText(message);
 
         new CountDownTimer(1801000, 1000) {
             @SuppressLint("DefaultLocale")
@@ -51,26 +57,19 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFinish() {
-                String passStatus = "Time's up!";
-                new AlertDialog.Builder(TestActivity.this)
-                        .setTitle(passStatus)
-                        .setMessage("Score is " + score+" out of"+ totalQuestions)
-                        .setPositiveButton("Restart",(dialogInterface, i) -> restartQuiz())
-                        .setCancelable(false)
-                        .show();
+                showTimeUpDialog();
             }
         }.start();
 
-
         totalQuestionTextView = findViewById(R.id.questionId);
         questionTextView = findViewById(R.id.Question);
-        ansA = findViewById(R.id. option1);
-        ansB = findViewById(R.id. option2);
-        ansC = findViewById(R.id. option3);
-        ansD = findViewById(R.id. option4);
-        nextBtn = findViewById(R.id.nextbtn);
-        prevBtn = findViewById(R.id.prevbtn);
-        submitBtn = findViewById(R.id.submitbtn);
+        ansA = findViewById(R.id.option1);
+        ansB = findViewById(R.id.option2);
+        ansC = findViewById(R.id.option3);
+        ansD = findViewById(R.id.option4);
+        nextBtn = findViewById(R.id.nextBtn);
+        prevBtn = findViewById(R.id.prevBtn);
+        submitBtn = findViewById(R.id.submitBtn);
 
         ansA.setOnClickListener(this);
         ansB.setOnClickListener(this);
@@ -81,89 +80,111 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         submitBtn.setOnClickListener(this);
 
 
-
-        //Buttons
-
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle next button click
-                if (selectedAnswer.equals(QuestionAnswer.correctAnswers[currentQuestionIndex])){
-                    score++;
-                }
-                currentQuestion+=1;
-                currentQuestionIndex+=1;
-                loadNewQuestion();
-                totalQuestionTextView.setText("Question : "+ currentQuestion +"/" + totalQuestions);
-            }
-        });
-        prevBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle previous button click
-                loadPreviousQuestion();
-                totalQuestionTextView.setText("Question : "+ currentQuestion +"/" + totalQuestions);
-            }
-        });
-        //Question Number
-        totalQuestionTextView.setText("Question : "+ currentQuestion +"/" + totalQuestions);
-
-        submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finishQuiz();
-            }
-        });
-
-
-
     }
 
-    //Radio buttons
-    @Override
-    public void onClick(View view){
-        RadioButton clickedButton = (RadioButton) view;
-        selectedAnswer = clickedButton.getText().toString();
-    }
-    void loadNewQuestion(){
-
-        if(currentQuestionIndex == totalQuestions){
-            finishQuiz();
-            return;
-
-        }
-
-        questionTextView.setText(QuestionAnswer.question[currentQuestionIndex]);
-        ansA.setText(QuestionAnswer.choices[currentQuestionIndex][0]);
-        ansB.setText(QuestionAnswer.choices[currentQuestionIndex][1]);
-        ansC.setText(QuestionAnswer.choices[currentQuestionIndex][2]);
-        ansD.setText(QuestionAnswer.choices[currentQuestionIndex][3]);
-    }
-
-    void loadPreviousQuestion(){
-        if (currentQuestionIndex > 0) {
-            currentQuestion-=1 ;// Decrement the question number
-            currentQuestionIndex-=1 ;// Decrement the question index
-            questionTextView.setText(QuestionAnswer.question[currentQuestionIndex]);// Update UI with the previous question and options
+    // Methods Declaration
+    public void loadNewQuestion() {
+        if (currentQuestionIndex < totalQuestions-1) {
+            currentQuestion++;
+            currentQuestionIndex++;
+            questionTextView.setText(QuestionAnswer.question[currentQuestionIndex]);
             ansA.setText(QuestionAnswer.choices[currentQuestionIndex][0]);
             ansB.setText(QuestionAnswer.choices[currentQuestionIndex][1]);
             ansC.setText(QuestionAnswer.choices[currentQuestionIndex][2]);
             ansD.setText(QuestionAnswer.choices[currentQuestionIndex][3]);
-        } else {
+        }
+        else
+            Toast.makeText(TestActivity.this, "This is the last question!!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void loadPreviousQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestion--;
+            currentQuestionIndex--;
+            questionTextView.setText(QuestionAnswer.question[currentQuestionIndex]);
+            ansA.setText(QuestionAnswer.choices[currentQuestionIndex][0]);
+            ansB.setText(QuestionAnswer.choices[currentQuestionIndex][1]);
+            ansC.setText(QuestionAnswer.choices[currentQuestionIndex][2]);
+            ansD.setText(QuestionAnswer.choices[currentQuestionIndex][3]);
+        }
+        else
             Toast.makeText(this, "No previous question available", Toast.LENGTH_SHORT).show();
+    }
+
+    public void finishQuiz() {
+        Intent j = new Intent(this, SubmitSuccessActivity.class);
+        j.putExtra("Score", score);
+        startActivity(j);
+    }
+    private void showTimeUpDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Time's Up!");
+        builder.setMessage("Your time is up. Please proceed to the results page.");
+
+        builder.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finishQuiz();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
+
+//Button Clicks
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.option1) {
+            selectedAnswer = ansA.getText().toString();
+        } else if (v.getId() == R.id.option2) {
+            selectedAnswer = ansB.getText().toString();
+        } else if (v.getId() == R.id.option3) {
+            selectedAnswer = ansC.getText().toString();
+        } else if (v.getId() == R.id.option4) {
+            selectedAnswer = ansD.getText().toString();
+        } else if (v.getId() == R.id.nextBtn) {
+            if (selectedAnswer.equals(QuestionAnswer.correctAnswers[currentQuestionIndex])) {
+                score++;
+            }
+            loadNewQuestion();
+            ((TextView) findViewById(R.id.questionId)).setText("Question : " + currentQuestion + "/" + totalQuestions );
+        } else if (v.getId() == R.id.prevBtn) {
+            loadPreviousQuestion();
+            ((TextView)findViewById(R.id.questionId)).setText("Question : " + currentQuestion + "/" + totalQuestions );
+        } else if (v.getId() == R.id.submitBtn) {
+            if (selectedAnswer.equals(QuestionAnswer.correctAnswers[currentQuestionIndex])) {
+                score++;
+            }
+            // Confirm activity to pop up
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            View dialogView = getLayoutInflater().inflate(R.layout.confirmation_activity, null);
+            builder.setView(dialogView);
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+            // Buttons on the alertdialog
+            Button noButton = dialogView.findViewById(R.id.no);
+            Button yesButton = dialogView.findViewById(R.id.yes);
+
+            noButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            yesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    finishQuiz();
+                }
+            });
         }
     }
-
-
-    void restartQuiz(){
-        score = 0;
-        currentQuestionIndex = 0;
-        loadNewQuestion();
-    }
-    void finishQuiz(){
-
-        Intent i = new Intent(this, ConfirmActivity.class);
-        startActivity(i);
-        }
-    }
-
+}

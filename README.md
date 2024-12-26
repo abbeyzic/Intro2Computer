@@ -1,1 +1,0 @@
-This is a group project by a group of 8 students who are just starting java programming. This app is designed mainly for first year students to practise Introductory course CSC 101 - Introduction to Computer in preparation for their first semester Exam.

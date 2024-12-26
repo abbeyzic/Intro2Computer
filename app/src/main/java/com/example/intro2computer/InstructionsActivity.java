@@ -26,9 +26,7 @@ public class InstructionsActivity extends AppCompatActivity {
 
     public void TestActivity(View view) {
         Intent i = new Intent(this, TestActivity.class);
-        // To send the
         i.putExtra("Name", getIntent().getStringExtra("Name"));
-        // Start the TestActivity
         startActivity(i);
     }
 }

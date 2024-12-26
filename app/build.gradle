@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace 'com.example.intro2computer'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.example.intro2computer"
@@ -37,6 +37,7 @@ dependencies {
     implementation libs.material
     implementation libs.constraintlayout
     implementation libs.activity
+    implementation libs.media3.common
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core

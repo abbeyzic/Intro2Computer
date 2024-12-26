@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".InstructionsActivity" android:parentActivityName=".MainActivity" android:label="Instructions"  />
-        <activity android:name=".TestActivity" android:exported="true" android:parentActivityName=".TestActivity" />
+        <activity android:name=".TestActivity" android:exported="true" android:parentActivityName=".InstructionsActivity" />
+        <activity android:name=".SubmitSuccessActivity" android:exported="true" android:parentActivityName=".TestActivity" />
+        <activity android:name=".Answers" android:exported="true" android:parentActivityName=".TestActivity" />
     </application>
 
 </manifest>
