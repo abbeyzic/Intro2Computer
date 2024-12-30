@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.drawable.ColorDrawable;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -166,6 +168,19 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
             AlertDialog dialog = builder.create();
             dialog.show();
+
+            // Setting the rounded background
+            dialog.getWindow().setBackgroundDrawableResource((R.drawable.rounded_dialog_background));
+            dialog.show();
+
+            //Getting WindowsManager.LayoutParams so that we can change the width and height
+            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+            layoutParams.copyFrom(dialog.getWindow().getAttributes());
+
+            //Setting width and height
+            layoutParams.width = 600;
+            layoutParams.height = 750;
+            dialog.getWindow().setAttributes(layoutParams);
 
             // Buttons on the alertdialog
             Button noButton = dialogView.findViewById(R.id.no);
