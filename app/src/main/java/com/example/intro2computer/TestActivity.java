@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.graphics.drawable.ColorDrawable;
@@ -20,6 +21,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class TestActivity extends AppCompatActivity implements View.OnClickListener {
     TextView totalQuestionTextView;
     TextView questionTextView;
+
+    RadioGroup radioGroup;
     RadioButton ansA;
     RadioButton ansB;
     RadioButton ansC;
@@ -65,6 +68,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
         totalQuestionTextView = findViewById(R.id.questionId);
         questionTextView = findViewById(R.id.Question);
+        radioGroup = findViewById(R.id.radioGroup);
         ansA = findViewById(R.id.option1);
         ansB = findViewById(R.id.option2);
         ansC = findViewById(R.id.option3);
@@ -94,6 +98,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
             ansB.setText(QuestionAnswer.choices[currentQuestionIndex][1]);
             ansC.setText(QuestionAnswer.choices[currentQuestionIndex][2]);
             ansD.setText(QuestionAnswer.choices[currentQuestionIndex][3]);
+            radioGroup.clearCheck();
         }
         else
             Toast.makeText(TestActivity.this, "This is the last question!!", Toast.LENGTH_SHORT).show();
