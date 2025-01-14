@@ -46,4 +46,5 @@ public class SubmitSuccessActivity extends AppCompatActivity implements View.OnC
             startActivity(i);
         }
     }
+
 }

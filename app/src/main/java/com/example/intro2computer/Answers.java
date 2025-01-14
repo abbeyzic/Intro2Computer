@@ -9,21 +9,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Answers extends AppCompatActivity implements View.OnClickListener{
-    Button restart;
-    String _AllQuestions;
-    int currentQuestionIndex = 0;
+public class Answers extends AppCompatActivity implements View.OnClickListener {
+    Button restart; TextView answers;
 
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.answers_activity);
 
-        _AllQuestions = get_AllQuestions();
-        ((TextView)findViewById(R.id.answerstext)).setText(_AllQuestions);
-
+        answers = findViewById(R.id.answers);
+        String questionsText = getFormattedQuestionsText(); // Get your formatted questions string
+        answers.setText(questionsText);
 
         restart = findViewById(R.id.restart);
-        AnswersText(get_AllQuestions());
 
         restart.setOnClickListener(this);
 
@@ -31,7 +28,7 @@ public class Answers extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.restart){
+        if (v.getId() == R.id.restart) {
             restartQuiz();
         }
     }
@@ -40,19 +37,18 @@ public class Answers extends AppCompatActivity implements View.OnClickListener{
         Intent i = new Intent(this, TestActivity.class);
         startActivity(i);
     }
-
-    @NonNull
-    public void AnswersText(String AllQuestions) {
-        int CurrentQuestionIndex = 0;
-        _AllQuestions = AllQuestions;
-        while (CurrentQuestionIndex <= QuestionAnswer.question.length-1) {
-            System.out.println(QuestionAnswer.question[currentQuestionIndex] + "\n" + QuestionAnswer.choices[CurrentQuestionIndex][0] + "\t" + QuestionAnswer.choices[CurrentQuestionIndex][1] + "\n" + QuestionAnswer.choices[CurrentQuestionIndex][2] + "\t" + QuestionAnswer.choices[CurrentQuestionIndex][3] + "\n" + QuestionAnswer.correctAnswers[CurrentQuestionIndex]);
-            CurrentQuestionIndex++;
+    private String getFormattedQuestionsText() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < QuestionAnswer.question.length; i++) {
+            sb.append("Question ").append(i + 1).append(": ").append(QuestionAnswer.question[i]).append("\n");
+            for (int j = 0; j < QuestionAnswer.choices[i].length; j++) {
+                sb.append("  ").append((char) ('A' + j)).append(". ").append(QuestionAnswer.choices[i][j]).append("\n");
+            }
+            sb.append("Correct Answer: ").append(QuestionAnswer.correctAnswers[i]).append("\n\n");
         }
-
-    }
-    String get_AllQuestions(){
-        return _AllQuestions;
+        return sb.toString();
     }
 }
+
+
 

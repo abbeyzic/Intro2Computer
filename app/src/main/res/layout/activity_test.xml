@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/montserrat_extrabolditalic"
         android:text="CSC 101"
         android:textColor="@color/green"
@@ -100,7 +100,7 @@
         android:fontFamily="@font/montserrat_regular"
         android:text="What is the full meaning of CPU?"
         android:textColor="@color/black"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -117,7 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/green"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:text="A. Central Power Unit" />
 
         <RadioButton
@@ -125,7 +125,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/green"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:text="B. Computer Processing Unit" />
 
         <RadioButton
@@ -133,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/green"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:text="C. Central Processing Unit" />
 
         <RadioButton
@@ -141,7 +141,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/green"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:text="D. Control Processing Unit" />
 
         <LinearLayout
@@ -166,7 +166,7 @@
                     android:fontFamily="@font/montserrat_regular"
                     android:text="Previous"
                     android:textColor="@color/nwhite"
-                    android:textSize="13sp"
+                    android:textSize="15sp"
                     app:cornerRadius="10dp" />
 
                 <Button
@@ -178,6 +178,7 @@
                     android:layout_marginStart="30dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:text="Next"
+                    android:textSize="15sp"
                     android:textColor="@color/nwhite"
                     app:cornerRadius="10dp" />
             </LinearLayout>
@@ -191,6 +192,7 @@
                 android:backgroundTint="@color/black"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="Submit"
+                android:textSize="15sp"
                 android:textColor="@color/nwhite"
                 app:cornerRadius="10dp" />
         </LinearLayout>

@@ -17,6 +17,8 @@ import android.graphics.drawable.ColorDrawable;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.HashMap;
+
 
 public class TestActivity extends AppCompatActivity implements View.OnClickListener {
     TextView totalQuestionTextView;
@@ -36,7 +38,10 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     int currentQuestionIndex = 0;
     int currentQuestion = currentQuestionIndex + 1;
 
-    String selectedAnswer = "";
+    String selectedAnswer = ""; String storedAnswer;
+
+    private HashMap<Integer, String> selectedAnswers = new HashMap<>();
+
 
 
     @SuppressLint("SetTextI18n")
@@ -44,6 +49,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+
 
         ((TextView)findViewById(R.id.questionId)).setText("Question : " + currentQuestion + "/" + totalQuestions);
 
@@ -65,6 +71,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 showTimeUpDialog();
             }
         }.start();
+
 
         totalQuestionTextView = findViewById(R.id.questionId);
         questionTextView = findViewById(R.id.Question);
@@ -98,7 +105,6 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
             ansB.setText(QuestionAnswer.choices[currentQuestionIndex][1]);
             ansC.setText(QuestionAnswer.choices[currentQuestionIndex][2]);
             ansD.setText(QuestionAnswer.choices[currentQuestionIndex][3]);
-            radioGroup.clearCheck();
         }
         else
             Toast.makeText(TestActivity.this, "This is the last question!!", Toast.LENGTH_SHORT).show();
@@ -113,8 +119,21 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
             ansB.setText(QuestionAnswer.choices[currentQuestionIndex][1]);
             ansC.setText(QuestionAnswer.choices[currentQuestionIndex][2]);
             ansD.setText(QuestionAnswer.choices[currentQuestionIndex][3]);
-        }
-        else
+
+            String storedAnswer = selectedAnswers.get(currentQuestionIndex);
+            if ( storedAnswer != null) {
+                if (storedAnswer.equals(ansA.getText().toString())) {
+                    ansA.setChecked(true);
+                } else if (storedAnswer.equals(ansB.getText().toString())) {
+                    ansB.setChecked(true);
+                } else if (storedAnswer.equals(ansC.getText().toString())) {
+                    ansC.setChecked(true);
+                } else if (storedAnswer.equals(ansD.getText().toString())) {
+                    ansD.setChecked(true);
+                }
+            }
+
+        }else
             Toast.makeText(this, "No previous question available", Toast.LENGTH_SHORT).show();
     }
 
@@ -139,9 +158,17 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         dialog.setCancelable(false);
         dialog.show();
     }
+//Back button does not return to instructions page
+    @Override
+    public void onBackPressed() {
+
+        Toast.makeText(this, "You can't go back!", Toast.LENGTH_SHORT).show();
+    }
+    //method to make each question as a single so the clicked option doesn't disappear when returning to the previous question so users can know what they chose in the previous question
 
 
 //Button Clicks
+
 
     @Override
     public void onClick(View v) {
@@ -157,7 +184,9 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
             if (selectedAnswer.equals(QuestionAnswer.correctAnswers[currentQuestionIndex])) {
                 score++;
             }
+            selectedAnswers.put(currentQuestionIndex, selectedAnswer);
             loadNewQuestion();
+            radioGroup.clearCheck();
             ((TextView) findViewById(R.id.questionId)).setText("Question : " + currentQuestion + "/" + totalQuestions );
         } else if (v.getId() == R.id.prevBtn) {
             loadPreviousQuestion();
@@ -183,8 +212,8 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
             layoutParams.copyFrom(dialog.getWindow().getAttributes());
 
             //Setting width and height
-            layoutParams.width = 600;
-            layoutParams.height = 750;
+            layoutParams.width = 900;
+            layoutParams.height = 1100;
             dialog.getWindow().setAttributes(layoutParams);
 
             // Buttons on the alertdialog
